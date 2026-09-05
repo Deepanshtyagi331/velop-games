@@ -31,7 +31,27 @@ export const GAMES_DATA = [
       theme: 'Treasure / rewards',
       primaryVisual: 'Game Coins',
       secondaryVisual: 'Gold accents, soft motion trails, reward chest/collection elements',
-      mood: 'Energetic and rewarding'
+      mood: 'Energetic and rewarding',
+      accentColor: '#f59e0b',
+      accentGradient: 'linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.08) 100%)',
+      glowColor: 'rgba(245, 158, 11, 0.35)'
+    },
+    guide: {
+      headline: 'Catch Gleaming Coins & Evade Hazards',
+      objective: 'Collect falling Game Coins and bonus stars as they cascade from above while avoiding hazard bombs.',
+      controlsList: [
+        { key: '← / → or A / D', action: 'Move catcher basket left and right' },
+        { key: 'Mouse / Touch', action: 'Drag or tap anywhere to slide smoothly' }
+      ],
+      catchItems: [
+        { name: 'Gold Coin', points: '+10 Pts', note: 'Standard reward coin', type: 'positive' },
+        { name: 'Star Gem', points: '+25 Pts', note: 'Rare speed multiplier', type: 'bonus' }
+      ],
+      avoidItems: [
+        { name: 'Hazard Bomb', penalty: '-1 Life', note: '3 strikes ends the round', type: 'danger' }
+      ],
+      scoringInfo: 'Every 100 in-game points automatically converts into bonus Game Coins upon completion.',
+      rewardPotential: 'Earn up to 15 Game Coins per session'
     }
   },
   {
@@ -54,7 +74,24 @@ export const GAMES_DATA = [
       theme: 'Elegant puzzle',
       primaryVisual: 'Premium illustrated memory cards',
       secondaryVisual: 'Subtle geometric/pattern elements',
-      mood: 'Calm, intelligent, polished'
+      mood: 'Calm, intelligent, polished',
+      accentColor: '#818cf8',
+      accentGradient: 'linear-gradient(135deg, rgba(129, 140, 248, 0.22) 0%, rgba(99, 102, 241, 0.08) 100%)',
+      glowColor: 'rgba(129, 140, 248, 0.35)'
+    },
+    guide: {
+      headline: 'Match Illustrated Card Pairs Against The Clock',
+      objective: 'Reveal face-down cards to discover and match all 8 matching pairs within 60 seconds.',
+      controlsList: [
+        { key: 'Click / Tap', action: 'Flip any card to reveal its illustrated face' }
+      ],
+      rulesList: [
+        { rule: 'Flip Two Cards', detail: 'If they match, they stay locked face up.' },
+        { rule: 'Mismatch Reset', detail: 'If they differ, both flip back over after 800ms.' },
+        { rule: 'Combo Streaks', detail: 'Consecutive matches trigger score multipliers.' }
+      ],
+      scoringInfo: 'Scores are calculated based on remaining time, minimal moves, and combo accuracy.',
+      rewardPotential: 'Earn up to 20 Game Coins per completed board'
     }
   },
   {

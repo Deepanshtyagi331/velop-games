@@ -5,6 +5,7 @@ import HomePage from './pages/Home/HomePage';
 import GamesPage from './pages/Games/GamesPage';
 import GameOnePage from './pages/GameOne/GameOnePage';
 import GameTwoPage from './pages/GameTwo/GameTwoPage';
+import GameplayPlaceholderPage from './pages/Gameplay/GameplayPlaceholderPage';
 import RedemptionPage from './pages/Redemption/RedemptionPage';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
 import DesignSystemPage from './pages/DesignSystem/DesignSystemPage';
@@ -19,12 +20,14 @@ function AppLayout() {
           <Route path="/" element={<HomePage />} />
           <Route path="/games" element={<GamesPage />} />
           
-          {/* Playable Game 1: Coin Catcher */}
+          {/* Playable Game 1: Coin Catcher & Gameplay Route */}
           <Route path="/games/coin-catcher" element={<GameOnePage />} />
+          <Route path="/games/coin-catcher/play" element={<GameplayPlaceholderPage />} />
           <Route path="/games/game-1" element={<Navigate to="/games/coin-catcher" replace />} />
 
-          {/* Playable Game 2: Memory Match */}
+          {/* Playable Game 2: Memory Match & Gameplay Route */}
           <Route path="/games/memory-match" element={<GameTwoPage />} />
+          <Route path="/games/memory-match/play" element={<GameplayPlaceholderPage />} />
           <Route path="/games/game-2" element={<Navigate to="/games/memory-match" replace />} />
 
           <Route path="/redeem" element={<RedemptionPage />} />
@@ -48,7 +51,7 @@ function AppLayout() {
         }}
       >
         <p style={{ margin: 0, color: 'inherit' }}>
-          &copy; 2026 VELOOP Rewards &bull; Phase 6 Centralized Economy State
+          &copy; 2026 VELOOP Rewards &bull; Phase 7 Game Home &amp; Entry Experience
         </p>
       </footer>
     </div>

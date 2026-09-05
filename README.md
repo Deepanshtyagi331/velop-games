@@ -12,6 +12,7 @@ A gamified rewards web application featuring playable mini-games, centralized To
 * **Phase 4**: Reusable `GameCard`, `TokenCost`, and `PlayNowButton` with shimmer effects.
 * **Phase 5**: Continuous horizontal `GamesCarousel` with auto-scroll, loop duplication, and hover pause.
 * **Phase 6**: Centralized `EconomyContext` with 100 Tokens / 20 Coins, dynamic affordability, double-spend lock, and `localStorage` resilience.
+* **Phase 7**: Reusable `GameHome` architecture with distinct visual identities (Coin Catcher gold/treasure vs Memory Match indigo/puzzle), interactive first-time `GameGuideModal` with independent persistence, light-themed gameplay environment preparation, and `GameBottomNav`.
 
 ## Tech Stack
 
@@ -25,8 +26,10 @@ A gamified rewards web application featuring playable mini-games, centralized To
 
 * `/` — VELOOP Rewards Platform Home
 * `/games` — VELOOP Games Hub (Auto-scrolling 13-Game Carousel & Live Balance)
-* `/games/coin-catcher` — Coin Catcher (Playable Game 1 & Live Economy)
-* `/games/memory-match` — Memory Match (Playable Game 2 & Live Economy)
+* `/games/coin-catcher` — Coin Catcher Game Home (Treasure Theme & Guide)
+* `/games/coin-catcher/play` — Coin Catcher Gameplay Arena (Light Theme)
+* `/games/memory-match` — Memory Match Game Home (Puzzle Theme & Guide)
+* `/games/memory-match/play` — Memory Match Gameplay Arena (Light Theme)
 * `/redeem` — Game Coin Redemption Center
 * `/design-system` — Visual Design System Showcase
 * `/game-cards` — 13-GameCard Component Test Bench (Phase 4)
