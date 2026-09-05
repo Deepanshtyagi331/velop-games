@@ -40,9 +40,14 @@ export default function GameCard({
 
     if (onPlay) {
       onPlay(game);
-    } else {
+    } else if (isPlayable) {
       const result = startGame(game);
       if (result.success && game.route) {
+        navigate(game.route);
+      }
+    } else {
+      // Banner-only title: navigate to showcase without token deduction
+      if (game.route) {
         navigate(game.route);
       }
     }

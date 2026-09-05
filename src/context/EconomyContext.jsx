@@ -155,6 +155,40 @@ export function EconomyProvider({ children }) {
     }
   }, []);
 
+  /**
+   * Atomically redeems a reward by deducting Game Coins,
+   * and if the reward is of type 'token', adding tokens to the balance in the same transaction.
+   */
+  const redeemReward = useCallback((reward) => {
+    if (!reward || typeof reward.gameCoinCost !== 'number' || isNaN(reward.gameCoinCost) || reward.gameCoinCost <= 0) {
+      return { success: false, error: 'Invalid reward cost' };
+    }
+
+    const cost = Math.floor(reward.gameCoinCost);
+    if (economy.gameCoins < cost) {
+      return { success: false, error: 'Insufficient Game Coins' };
+    }
+
+    let nextCoins = economy.gameCoins - cost;
+    let nextTokens = economy.tokens;
+
+    if (reward.type === 'token') {
+      const tokensToAdd = Math.floor(reward.rewardAmount || 0);
+      nextTokens += tokensToAdd;
+    }
+
+    setEconomy({
+      tokens: nextTokens,
+      gameCoins: nextCoins
+    });
+
+    return {
+      success: true,
+      remainingCoins: nextCoins,
+      newTokens: nextTokens
+    };
+  }, [economy.gameCoins, economy.tokens]);
+
   const contextValue = {
     tokens: economy.tokens,
     gameCoins: economy.gameCoins,
@@ -162,6 +196,7 @@ export function EconomyProvider({ children }) {
     spendTokens,
     addGameCoins,
     spendGameCoins,
+    redeemReward,
     startGame,
     resetEconomy
   };

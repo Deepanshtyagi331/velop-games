@@ -1,0 +1,190 @@
+/**
+ * memoryMatch.css
+ * 3D Card Flip mechanics, responsive 4x4 puzzle grid, and accessibility styles.
+ */
+
+.memory-match-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 4x4 Card Grid */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* 3D Card Flip Wrapper */
+.memory-card-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 12px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.memory-card-wrapper:disabled {
+  cursor: default;
+}
+
+.memory-card-wrapper:focus-visible {
+  outline: 3px solid #6366f1;
+  outline-offset: 3px;
+  z-index: 10;
+}
+
+/* Inner 3D Container */
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  border-radius: 12px;
+}
+
+/* Flipped & Matched Rotations */
+.memory-card-wrapper.flipped .memory-card-inner,
+.memory-card-wrapper.matched .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared Face Styles */
+.memory-card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  overflow: hidden;
+}
+
+/* Card Back (Face Down) */
+.memory-card-back {
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #7c3aed 100%);
+  border: 2px solid #818cf8;
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.15), 0 2px 6px rgba(79, 70, 229, 0.2);
+  color: #ffffff;
+  transform: rotateY(0deg);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.memory-card-wrapper:not(:disabled):hover .memory-card-back {
+  transform: scale(1.03);
+  border-color: #a5b4fc;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+}
+
+.memory-card-wrapper:not(:disabled):active .memory-card-back {
+  transform: scale(0.97);
+}
+
+/* Pattern on Card Back */
+.card-back-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Front (Face Up) */
+.memory-card-front {
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  transform: rotateY(180deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  padding: 6px;
+  gap: 4px;
+}
+
+/* Matched State */
+.memory-card-wrapper.matched .memory-card-front {
+  border-color: #10b981;
+  background-color: #f0fdf4;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
+}
+
+.matched-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Scaling for Small Mobile */
+@media (max-width: 480px) {
+  .memory-grid {
+    gap: 8px;
+    padding: 10px;
+    border-radius: 16px;
+  }
+  .card-back-emblem {
+    width: 28px;
+    height: 28px;
+  }
+  .memory-card-label {
+    display: none; /* Hide text label on very small screens to maintain icon clarity */
+  }
+}
+
+@media (max-width: 360px) {
+  .memory-grid {
+    gap: 6px;
+    padding: 8px;
+  }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .memory-card-inner {
+    transition: none !important;
+  }
+  .memory-card-back {
+    transition: none !important;
+  }
+  .memory-card-wrapper:hover .memory-card-back {
+    transform: none !important;
+  }
+}

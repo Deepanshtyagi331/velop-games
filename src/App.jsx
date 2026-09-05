@@ -5,11 +5,11 @@ import HomePage from './pages/Home/HomePage';
 import GamesPage from './pages/Games/GamesPage';
 import GameOnePage from './pages/GameOne/GameOnePage';
 import GameTwoPage from './pages/GameTwo/GameTwoPage';
-import GameplayPlaceholderPage from './pages/Gameplay/GameplayPlaceholderPage';
+import CoinCatcherGame from './games/coinCatcher/CoinCatcherGame';
+import MemoryMatchGame from './games/memoryMatch/MemoryMatchGame';
 import RedemptionPage from './pages/Redemption/RedemptionPage';
 import NotFoundPage from './pages/NotFound/NotFoundPage';
-import DesignSystemPage from './pages/DesignSystem/DesignSystemPage';
-import GameCardsPage from './pages/GameCards/GameCardsPage';
+import GameHomePage from './pages/GameHome/GameHomePage';
 
 function AppLayout() {
   return (
@@ -20,21 +20,20 @@ function AppLayout() {
           <Route path="/" element={<HomePage />} />
           <Route path="/games" element={<GamesPage />} />
           
-          {/* Playable Game 1: Coin Catcher & Gameplay Route */}
+          {/* Playable Game 1: Coin Catcher & Active Gameplay */}
           <Route path="/games/coin-catcher" element={<GameOnePage />} />
-          <Route path="/games/coin-catcher/play" element={<GameplayPlaceholderPage />} />
+          <Route path="/games/coin-catcher/play" element={<CoinCatcherGame />} />
           <Route path="/games/game-1" element={<Navigate to="/games/coin-catcher" replace />} />
 
-          {/* Playable Game 2: Memory Match & Gameplay Route */}
+          {/* Playable Game 2: Memory Match & Active Gameplay */}
           <Route path="/games/memory-match" element={<GameTwoPage />} />
-          <Route path="/games/memory-match/play" element={<GameplayPlaceholderPage />} />
+          <Route path="/games/memory-match/play" element={<MemoryMatchGame />} />
           <Route path="/games/game-2" element={<Navigate to="/games/memory-match" replace />} />
 
+          {/* 11 Banner Arcade Titles Route */}
+          <Route path="/games/:gameSlug" element={<GameHomePage />} />
+
           <Route path="/redeem" element={<RedemptionPage />} />
-          
-          {/* Development showcase routes (unlisted in primary nav) */}
-          <Route path="/design-system" element={<DesignSystemPage />} />
-          <Route path="/game-cards" element={<GameCardsPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -51,7 +50,7 @@ function AppLayout() {
         }}
       >
         <p style={{ margin: 0, color: 'inherit' }}>
-          &copy; 2026 VELOOP Rewards &bull; Phase 7 Game Home &amp; Entry Experience
+          &copy; 2026 VELOOP Rewards &bull; All Rights Reserved
         </p>
       </footer>
     </div>

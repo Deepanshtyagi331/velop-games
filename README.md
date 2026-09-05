@@ -1,40 +1,127 @@
-# VELOOP Rewards — Games
+# VELOOP Rewards — Games Banner
 
-## Overview
+A high-performance, responsive, gamified arcade and rewards ecosystem developed for the **VELOOP Rewards** platform. Built with React 19, Vite, Vanilla CSS Design System, HTML5 Canvas 2D engine, and centralized economy architecture.
 
-A gamified rewards web application featuring playable mini-games, centralized Token & Game Coin economy, and a redemption center. Built with Vite + React, Vanilla CSS design tokens, custom 16:9 AVIF game artworks, dynamic auto-scrolling carousel, and resilient centralized state management.
+---
 
-### Implemented Phases
-* **Phase 1**: Project foundation, React Router, clean architecture.
-* **Phase 2**: VELOOP visual design system, `#161827` dark theme, typography, tokens.
-* **Phase 3A**: 13-game catalog architecture (`gamesData.js`).
-* **Phase 3B**: 13 standalone original 16:9 AVIF game artworks.
-* **Phase 4**: Reusable `GameCard`, `TokenCost`, and `PlayNowButton` with shimmer effects.
-* **Phase 5**: Continuous horizontal `GamesCarousel` with auto-scroll, loop duplication, and hover pause.
-* **Phase 6**: Centralized `EconomyContext` with 100 Tokens / 20 Coins, dynamic affordability, double-spend lock, and `localStorage` resilience.
-* **Phase 7**: Reusable `GameHome` architecture with distinct visual identities (Coin Catcher gold/treasure vs Memory Match indigo/puzzle), interactive first-time `GameGuideModal` with independent persistence, light-themed gameplay environment preparation, and `GameBottomNav`.
+## 🚀 Live Demo & Deployment
+- **Repository**: [https://github.com/Deepanshtyagi331/velop-games](https://github.com/Deepanshtyagi331/velop-games)
+- **Deployment Support**: Configured for instant single-page application (SPA) hosting on **Vercel** with clean rewrite routing rules via [vercel.json](file:///Users/deepanshtyagi/Documents/velop-games/vercel.json).
+*(A live Vercel URL can be deployed directly from the GitHub repository).*
 
-## Tech Stack
+---
 
-* React 18
-* Vite
-* React Router 6
-* Lucide React
-* Vanilla CSS Design System
+## 🛠️ Tech Stack
 
-## Routes
+- **Framework**: React 19 + Vite
+- **Routing**: React Router 7 (SPA architecture with client-side history navigation)
+- **Styling**: Pure Vanilla CSS Design System (no TailwindCSS or CSS frameworks)
+  - Custom design tokens ([variables.css](file:///Users/deepanshtyagi/Documents/velop-games/src/styles/variables.css))
+  - Rich dark theme canvas (`#161827`) with elevated glass surfaces
+  - Independent high-contrast light environments for arcade gameplay
+  - WCAG 2.1 AA accessible contrast ratios and high-visibility `:focus-visible` rings
+  - Full `@media (prefers-reduced-motion: reduce)` system integration
+- **Graphics & Rendering**:
+  - HTML5 Canvas 2D with `requestAnimationFrame` 60fps loop for Coin Catcher
+  - 3D CSS perspective card flips (`transform-style: preserve-3d`) for Memory Match
+  - 13 custom-generated, high-efficiency **AVIF** game artworks (16:9 aspect ratio)
+- **State & Architecture**: Centralized React Context (`EconomyContext.jsx`) with atomic transactions, double-spend concurrency locks, and `localStorage` resilience.
+- **Icons**: Lucide React
 
-* `/` — VELOOP Rewards Platform Home
-* `/games` — VELOOP Games Hub (Auto-scrolling 13-Game Carousel & Live Balance)
-* `/games/coin-catcher` — Coin Catcher Game Home (Treasure Theme & Guide)
-* `/games/coin-catcher/play` — Coin Catcher Gameplay Arena (Light Theme)
-* `/games/memory-match` — Memory Match Game Home (Puzzle Theme & Guide)
-* `/games/memory-match/play` — Memory Match Gameplay Arena (Light Theme)
-* `/redeem` — Game Coin Redemption Center
-* `/design-system` — Visual Design System Showcase
-* `/game-cards` — 13-GameCard Component Test Bench (Phase 4)
+---
 
-## Local Development
+## ✨ Features
+
+1. **13-Game Continuous Carousel**:
+   - Seamless horizontal loop rendering all 13 titles with duplicated buffer tracking.
+   - Smooth continuous auto-scroll (~0.7px/frame) with automatic hover pause and touch-drag resume.
+   - Mouse-drag panning on desktop and touch-swipe on mobile.
+   - Interactive accessible dot indicators with keyboard focus.
+   - Strictly free of clumsy previous/next navigation arrows.
+2. **Centralized Token & Coin Economy**:
+   - Single source of truth for **Tokens** (play passes) and **Game Coins** (earned currency).
+   - Playable game entry strictly costs **20 Tokens** deducted once at launch.
+   - Replay, Revive, Game Home navigation, and Redemption never deduct tokens.
+   - Idempotent transaction locks prevent double deductions from rapid clicking or re-renders.
+   - Automatic fallback persistence in `localStorage['velop-economy']`.
+3. **Two Fully Playable Original Games**:
+   - **Coin Catcher** (`/games/coin-catcher/play`): 60fps Canvas arcade game with catcher movement, falling coins, star gems, hazard bombs, particle bursts, screen shake, and light arena theme.
+   - **Memory Match** (`/games/memory-match/play`): 4×4 3D flip card puzzle with 8 icon pairs, Fisher-Yates deck shuffle, combo multipliers, countdown timer, and race-condition guards.
+4. **First-Time Game Guide & Tutorial Modals**:
+   - Accessible pre-game tutorial modals (`GameGuideModal.jsx`) displaying objectives, scoring rules, and controls.
+   - Independent tutorial persistence per game (`velop-guide-coin-catcher`, `velop-guide-memory-match`).
+5. **Reward Settlement & Revive System**:
+   - Deterministic reward calculation based on performance.
+   - 1-per-round Revive flow:
+     - Coin Catcher restores 2 lives and clears nearby hazards.
+     - Memory Match adds +20 seconds while preserving current board and pairs.
+   - Idempotent settlement guard: every session credits Game Coins strictly once.
+6. **Redemption Center (`/redeem`)**:
+   - Marketplace converting Game Coins into 5 tangible platform assets (VE Points, SVE Points, Gems, Tokens, and Spins).
+   - Atomic token conversion: adds tokens and deducts coins in a single synchronized state update.
+   - Dynamic affordability feedback ("Redeem Reward" vs "Need X More").
+   - Synchronous double-click guard and persistent recent redemption log.
+7. **Comprehensive Responsiveness (320px to 1920px)**:
+   - Zero horizontal scroll overflow across all screen sizes.
+   - Mobile-first touch targets ($\ge 44\text{px}$) and adaptive layouts.
+
+---
+
+## 🎮 13-Game Catalog
+
+| # | Game Title | Category | Type | Route | Description |
+| :-: | :--- | :---: | :---: | :--- | :--- |
+| **1** | **Coin Catcher** | Arcade | **Playable** | `/games/coin-catcher` | Catch falling coins and gems while evading hazard bombs in high-stakes arcade action. |
+| **2** | **Memory Match** | Puzzle | **Playable** | `/games/memory-match` | Test cognitive recall by matching illustrated reward cards before time expires. |
+| **3** | **Color Rush** | Reflex | Banner Showcase | `/games/color-rush` | Match shifting spectrum lines at lightning speed to trigger score multipliers. |
+| **4** | **Tile Tap** | Reflex | Banner Showcase | `/games/tile-tap` | Rhythmic precision tapping on reactive glowing tiles without missing a single beat. |
+| **5** | **Fruit Slice** | Arcade | Banner Showcase | `/games/fruit-slice` | Slice through airborne cascades of fresh reward fruits with swift blade swipes. |
+| **6** | **Number Dash** | Challenge | Banner Showcase | `/games/number-dash` | Rapid-fire math and numerical sequence challenges for analytical thinkers. |
+| **7** | **Bubble Pop** | Arcade | Banner Showcase | `/games/bubble-pop` | Aim and pop floating clusters of luminous orbs to trigger chain reactions. |
+| **8** | **Lucky Spin** | Chance | Banner Showcase | `/games/lucky-spin` | Spin the gleaming fortune wheel for opportunities to unlock bonus Game Coins. |
+| **9** | **Word Sprint** | Word | Banner Showcase | `/games/word-sprint` | Race against the clock to connect anagram letters and assemble vocabulary words. |
+| **10** | **Stack Master** | Skill | Banner Showcase | `/games/stack-master` | Stack floating architectural blocks with laser-sharp timing to build towers. |
+| **11** | **Target Hit** | Reflex | Banner Showcase | `/games/target-hit` | Hone precision aiming and hit moving bullseyes under countdown pressure. |
+| **12** | **Gem Collector** | Collection | Banner Showcase | `/games/gem-collector` | Harvest sparkling crystals and rare gemstones across cavernous mines. |
+| **13** | **Spin & Win** | Reward | Banner Showcase | `/games/spin-and-win` | Celebratory wheel awarding premium token bonuses and exclusive multipliers. |
+
+---
+
+## 💰 Economy Rules & Token Lifecycle
+
+1. **Initial Prototype Balance**: `100 Tokens` & `20 Game Coins`.
+2. **Game Entry Cost**: Exactly **20 Tokens** deducted once when launching either playable game from the Games Hub.
+3. **No Double Charges**: Visiting the Game Home page, reading the tutorial guide, clicking Play Again, or using a Revive costs **0 additional Tokens**.
+4. **Reward Crediting**:
+   - Coin Catcher rewards up to **15 Game Coins** based on collected items and score.
+   - Memory Match rewards up to **20 Game Coins** based on matched pairs and time bonus.
+   - Rewards are added directly to the shared, centralized Game Coin balance.
+5. **Redemption**:
+   - Spent through the `/redeem` marketplace.
+   - When redeeming **20 Tokens** for **50 Game Coins**, Game Coins decrease by 50 and Tokens increase by 20 atomically.
+
+---
+
+## 🧭 Application Routes
+
+| Route | Page | Description |
+| :--- | :--- | :--- |
+| `/` | **Home Page** | Platform landing page with hero overview and quick access to games. |
+| `/games` | **Games Hub** | Main arcade hub featuring the 13-game auto-scrolling carousel and live balances. |
+| `/games/coin-catcher` | **Coin Catcher Home** | Game Home pre-game entry experience, specs, rules, and tutorial trigger. |
+| `/games/coin-catcher/play` | **Coin Catcher Arena** | Full-screen light-environment 60fps Canvas arcade game. |
+| `/games/memory-match` | **Memory Match Home** | Game Home pre-game entry experience, specs, rules, and tutorial trigger. |
+| `/games/memory-match/play` | **Memory Match Arena** | Full-screen light-environment 4×4 3D flip card puzzle. |
+| `/games/:gameSlug` | **Banner Showcase** | Thematic showcase page for any of the 11 catalog banner titles. |
+| `/redeem` | **Redemption Center** | Market converting Game Coins into VE, SVE, Gems, Tokens, and Spins. |
+| `*` | **Not Found** | Friendly 404 recovery page with route navigation. |
+
+---
+
+## 💻 Running Locally
+
+### Prerequisites
+- Node.js 18+ and npm
 
 ### Installation
 ```bash
@@ -45,8 +132,19 @@ npm install
 ```bash
 npm run dev
 ```
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Linting
+```bash
+npx oxlint
+```
 
 ### Production Build
 ```bash
 npm run build
+```
+
+### Production Preview
+```bash
+npm run preview
 ```
