@@ -15,16 +15,19 @@ A high-performance, responsive, gamified arcade and rewards ecosystem developed 
 
 - **Framework**: React 19 + Vite
 - **Routing**: React Router 7 (SPA architecture with client-side history navigation)
-- **Styling**: Pure Vanilla CSS Design System (no TailwindCSS or CSS frameworks)
-  - Custom design tokens ([variables.css](file:///Users/deepanshtyagi/Documents/velop-games/src/styles/variables.css))
+- **Styling & Components**:
+  - Pure Vanilla CSS Design System with custom tokens ([variables.css](file:///Users/deepanshtyagi/Documents/velop-games/src/styles/variables.css))
+  - CSS Modules (`.module.css`) for component-scoped styles ([RecentRedemptions.module.css](file:///Users/deepanshtyagi/Documents/velop-games/src/components/redemption/RecentRedemptions.module.css))
+  - Bootstrap (installed dependency in [package.json](file:///Users/deepanshtyagi/Documents/velop-games/package.json))
   - Rich dark theme canvas (`#161827`) with elevated glass surfaces
   - Independent high-contrast light environments for arcade gameplay
   - WCAG 2.1 AA accessible contrast ratios and high-visibility `:focus-visible` rings
   - Full `@media (prefers-reduced-motion: reduce)` system integration
-- **Graphics & Rendering**:
+- **Graphics & Assets**:
   - HTML5 Canvas 2D with `requestAnimationFrame` 60fps loop for Coin Catcher
   - 3D CSS perspective card flips (`transform-style: preserve-3d`) for Memory Match
   - 13 custom-generated, high-efficiency **AVIF** game artworks (16:9 aspect ratio)
+  - Dedicated transparent SVG vector icons for Token and Game Coin in `public/assets/icons/`
 - **State & Architecture**: Centralized React Context (`EconomyContext.jsx`) with atomic transactions, double-spend concurrency locks, and `localStorage` resilience.
 - **Icons**: Lucide React
 
@@ -87,11 +90,34 @@ A high-performance, responsive, gamified arcade and rewards ecosystem developed 
 
 ---
 
+## 🔬 Game Research & Mechanics Reference
+
+Both playable titles were developed as independent implementations based on established arcade and puzzle game theory:
+
+1. **Coin Catcher (Arcade Collection Mechanics)**:
+   - **Research Reference**: Inspired by classical paddle and falling-item reflex titles (*Kaboom!*, *Catch the Apples*).
+   - **Engine Design**: Built from scratch using native HTML5 Canvas 2D and `requestAnimationFrame`. Delta-time physics (`Math.min((t - last) / 1000, 0.1)`) ensure deterministic 60fps mechanics across devices.
+   - **Difficulty Progression**: Dynamic scaling curve where fall velocity escalates from $160\text{px/s}$ to $300\text{px/s}$ and bomb hazard frequency scales from $18\%$ to $35\%$ over 60 seconds.
+   - **Reward Algorithm**: Deterministic tiered reward formula converting final score into Game Coins ($+5$ to $+20$ Coins).
+
+2. **Memory Match (Cognitive Recall Mechanics)**:
+   - **Research Reference**: Modeled on classical pairing puzzle systems (*Concentration / Pelmanism*).
+   - **Deck Randomization**: Employs the unbiased Fisher-Yates shuffle algorithm on a 4×4 grid of 16 illustrated cards (8 matching pairs).
+   - **3D Flip Architecture**: Native CSS 3D matrix transforms (`transform: rotateY(180deg)` with `transform-style: preserve-3d` and `backface-visibility: hidden`).
+   - **Streak Multipliers**: Consecutive matches trigger combo bonuses ($+50\text{ bonus pts}$ per streak), rewarding accurate cognitive recall.
+
+---
+
 ## 💰 Economy Rules & Token Lifecycle
 
 1. **Initial Prototype Balance**: `100 Tokens` & `20 Game Coins`.
-2. **Game Entry Cost**: Exactly **20 Tokens** deducted once when launching either playable game from the Games Hub.
-3. **No Double Charges**: Visiting the Game Home page, reading the tutorial guide, clicking Play Again, or using a Revive costs **0 additional Tokens**.
+2. **Exact Token Flow Order**:
+   - **Games Hub (`/games`)**: Browsing carousel and clicking "Play Now" routes to the game's Home page with **0 Tokens deducted**.
+   - **Game Home (`/games/coin-catcher` or `/games/memory-match`)**: Displays game specs, Game Coin balance, and entry fee.
+   - **Game Home Play Now**: Clicking "Play Now" checks for $\ge 20$ Tokens, **deducts strictly 20 Tokens here**, and initiates the session.
+   - **Guide**: First-time players view the tutorial modal before entering gameplay.
+   - **Active Gameplay**: Launches into the arena with balance updated (e.g. 100 → 80 Tokens).
+3. **No Double Charges**: Reading tutorials, replaying from Game Over, or using a Revive costs **0 additional Tokens**.
 4. **Reward Crediting**:
    - Coin Catcher rewards up to **15 Game Coins** based on collected items and score.
    - Memory Match rewards up to **20 Game Coins** based on matched pairs and time bonus.

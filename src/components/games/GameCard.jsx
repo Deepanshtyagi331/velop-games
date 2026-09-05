@@ -20,7 +20,7 @@ export default function GameCard({
   style = {}
 }) {
   const navigate = useNavigate();
-  const { canAffordGame, startGame } = useEconomy();
+  const { canAffordGame } = useEconomy();
   const [isCardHovered, setIsCardHovered] = useState(false);
 
   if (!game) return null;
@@ -40,16 +40,9 @@ export default function GameCard({
 
     if (onPlay) {
       onPlay(game);
-    } else if (isPlayable) {
-      const result = startGame(game);
-      if (result.success && game.route) {
-        navigate(game.route);
-      }
-    } else {
-      // Banner-only title: navigate to showcase without token deduction
-      if (game.route) {
-        navigate(game.route);
-      }
+    } else if (game.route) {
+      // Navigates to game-specific Home page where token validation and entry deduction occur
+      navigate(game.route);
     }
   };
 

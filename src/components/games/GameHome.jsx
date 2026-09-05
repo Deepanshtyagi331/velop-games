@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import BalanceDisplay from '../economy/BalanceDisplay';
+import TokenCost from '../economy/TokenCost';
 import GameGuideModal from './GameGuideModal';
 import GameBottomNav from './GameBottomNav';
+import useEconomy from '../../hooks/useEconomy';
 import {
   ArrowLeft,
   Play,
@@ -12,17 +14,21 @@ import {
   Gamepad2,
   CheckCircle2,
   AlertTriangle,
-  RotateCcw
+  AlertCircle,
+  RotateCcw,
+  Coins
 } from 'lucide-react';
 
 /**
  * GameHome Component
  * Reusable pre-game entry experience for playable VELOOP games.
  * Dynamically adapts visual theme, hero presentation, and guide mechanics.
- * Strictly avoids double-charging tokens.
+ * Strictly performs 20 Token entry deduction upon clicking Play Now here.
  */
 export default function GameHome({ game }) {
   const navigate = useNavigate();
+  const { tokens, canAffordGame, startGame } = useEconomy();
+  const [insufficientError, setInsufficientError] = useState(false);
 
   // State
   const [isGuideOpen, setIsGuideOpen] = useState(false);
@@ -106,7 +112,22 @@ export default function GameHome({ game }) {
 
   // Handlers
   const handlePlayClick = () => {
-    // If player has not completed the tutorial, guide them first
+    // 1. Validate token balance first
+    if (!canAffordGame(game)) {
+      setInsufficientError(true);
+      return;
+    }
+
+    // 2. Deduct 20 Tokens atomically for this round
+    const result = startGame(game);
+    if (!result.success) {
+      setInsufficientError(true);
+      return;
+    }
+
+    setInsufficientError(false);
+
+    // 3. If player has not completed the tutorial, guide them first
     if (!isGuideCompleted) {
       setIsGuideOpen(true);
     } else {
@@ -440,10 +461,14 @@ export default function GameHome({ game }) {
               flexWrap: 'wrap'
             }}
           >
+            {/* Token Entry Cost Requirement */}
+            <TokenCost amount={game.tokenCost || 20} />
+
             {/* Play Now CTA (Initiates pre-game flow / guide) */}
             <button
               type="button"
               onClick={handlePlayClick}
+              disabled={!canAffordGame(game)}
               className="shimmer-container transition-button-press"
               style={{
                 position: 'relative',
@@ -453,23 +478,39 @@ export default function GameHome({ game }) {
                 gap: 'var(--space-2)',
                 padding: '12px 28px',
                 borderRadius: 'var(--radius-sm)',
-                background: isCoinCatcher
-                  ? 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)'
-                  : 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
-                color: '#ffffff',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                boxShadow: isCoinCatcher
-                  ? '0 4px 14px rgba(245, 158, 11, 0.4)'
-                  : '0 4px 14px rgba(99, 102, 241, 0.4)',
+                background: !canAffordGame(game)
+                  ? 'rgba(239, 68, 68, 0.15)'
+                  : isCoinCatcher
+                    ? 'linear-gradient(135deg, #d97706 0%, #f59e0b 100%)'
+                    : 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)',
+                color: !canAffordGame(game) ? 'var(--color-error)' : '#ffffff',
+                border: !canAffordGame(game)
+                  ? '1px solid rgba(239, 68, 68, 0.4)'
+                  : '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: !canAffordGame(game)
+                  ? 'none'
+                  : isCoinCatcher
+                    ? '0 4px 14px rgba(245, 158, 11, 0.4)'
+                    : '0 4px 14px rgba(99, 102, 241, 0.4)',
                 fontSize: 'var(--font-size-button)',
                 fontWeight: 'var(--font-weight-bold)',
-                cursor: 'pointer',
+                cursor: !canAffordGame(game) ? 'not-allowed' : 'pointer',
+                opacity: !canAffordGame(game) ? 0.75 : 1,
                 overflow: 'hidden'
               }}
             >
-              <div className="shimmer-sweep" aria-hidden="true" />
-              <Play size={18} fill="currentColor" />
-              <span>{isGuideCompleted ? 'Play Now' : 'Play & View Guide'}</span>
+              {canAffordGame(game) && <div className="shimmer-sweep" aria-hidden="true" />}
+              {canAffordGame(game) ? (
+                <>
+                  <Play size={18} fill="currentColor" />
+                  <span>{isGuideCompleted ? 'Play Now (20 Tokens)' : 'Play & View Guide (20 Tokens)'}</span>
+                </>
+              ) : (
+                <>
+                  <AlertCircle size={18} />
+                  <span>Need 20 Tokens</span>
+                </>
+              )}
             </button>
 
             {/* How to Play CTA (Always reopens guide anytime) */}
@@ -503,6 +544,51 @@ export default function GameHome({ game }) {
               <span>How to Play</span>
             </button>
           </div>
+
+          {/* Insufficient Token Alert Banner */}
+          {(!canAffordGame(game) || insufficientError) && (
+            <div
+              role="alert"
+              className="animate-fade-in"
+              style={{
+                padding: 'var(--space-3) var(--space-4)',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.35)',
+                color: 'var(--color-text-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 'var(--space-3)',
+                flexWrap: 'wrap'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <AlertCircle size={18} style={{ color: 'var(--color-error)', flexShrink: 0 }} />
+                <span style={{ fontSize: 'var(--font-size-small)' }}>
+                  <strong>Insufficient Tokens:</strong> You have <strong>{tokens} Tokens</strong>. 20 Tokens are required to enter.
+                </span>
+              </div>
+              <Link
+                to="/redeem"
+                style={{
+                  padding: '6px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--color-gold)',
+                  color: '#0f172a',
+                  fontSize: 'var(--font-size-xs)',
+                  fontWeight: 'var(--font-weight-bold)',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Coins size={13} />
+                <span>Redeem Tokens</span>
+              </Link>
+            </div>
+          )}
 
           {/* Reward Earning Explanation Banner */}
           <div
