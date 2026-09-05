@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+      <radialGradient id="bg8" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="#1e1b4b" />
+        <stop offset="60%" stop-color="#131131" />
+        <stop offset="100%" stop-color="#0a081c" />
+      </radialGradient>
+      <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fef08a" />
+        <stop offset="40%" stop-color="#f59e0b" />
+        <stop offset="70%" stop-color="#d97706" />
+        <stop offset="100%" stop-color="#78350f" />
+      </linearGradient>
+      <filter id="glow8" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur" />
+        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+    <rect width="1280" height="720" fill="url(#bg8)" />
+    <!-- Festive Radial Sunburst Rays -->
+    <g opacity="0.12" fill="#fbbf24">
+      <polygon points="640,360 540,0 740,0" />
+      <polygon points="640,360 1280,240 1280,480" />
+      <polygon points="640,360 740,720 540,720" />
+      <polygon points="640,360 0,480 0,240" />
+    </g>
+
+    <!-- Main Central Fortune Wheel -->
+    <g transform="translate(640, 360)">
+      <!-- Outer Wheel Glow -->
+      <circle cx="0" cy="0" r="230" fill="none" stroke="#f59e0b" stroke-width="4" opacity="0.4" filter="url(#glow8)" />
+      <!-- Outer Gold Rim -->
+      <circle cx="0" cy="0" r="220" fill="#181533" stroke="url(#goldRim)" stroke-width="14" />
+      
+      <!-- Wheel Wedges (8 segments) -->
+      <g>
+        <path d="M 0,0 L 0,-212 A 212,212 0 0,1 150,-150 Z" fill="#4f46e5" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L 150,-150 A 212,212 0 0,1 212,0 Z" fill="#b45309" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L 212,0 A 212,212 0 0,1 150,150 Z" fill="#047857" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L 150,150 A 212,212 0 0,1 0,212 Z" fill="#6d28d9" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L 0,212 A 212,212 0 0,1 -150,150 Z" fill="#b91c1c" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L -150,150 A 212,212 0 0,1 -212,0 Z" fill="#4338ca" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L -212,0 A 212,212 0 0,1 -150,-150 Z" fill="#d97706" stroke="#fbbf24" stroke-width="1.5" />
+        <path d="M 0,0 L -150,-150 A 212,212 0 0,1 0,-212 Z" fill="#0f766e" stroke="#fbbf24" stroke-width="1.5" />
+      </g>
+
+      <!-- Center Gold Hub -->
+      <circle cx="0" cy="0" r="55" fill="url(#goldRim)" stroke="#fef08a" stroke-width="3" filter="url(#glow8)" />
+      <circle cx="0" cy="0" r="42" fill="#1e1b4b" stroke="#f59e0b" stroke-width="2" />
+      <!-- Star in Center Hub -->
+      <polygon points="0,-22 7,-7 22,0 7,7 0,22 -7,7 -22,0 -7,-7" fill="#fbbf24" />
+
+      <!-- Top Pointer Flipper (Pointing down) -->
+      <polygon points="0,-240 -16,-280 16,-280" fill="url(#goldRim)" stroke="#fef08a" stroke-width="2" filter="url(#glow8)" />
+      <circle cx="0" cy="-280" r="10" fill="#fef08a" />
+    </g>
+
+    <!-- Floating Gold Coin Tokens & Confetti Particles -->
+    <circle cx="340" cy="220" r="16" fill="url(#goldRim)" filter="url(#glow8)" />
+    <circle cx="950" cy="240" r="20" fill="url(#goldRim)" filter="url(#glow8)" />
+    <circle cx="380" cy="480" r="14" fill="url(#goldRim)" />
+    <circle cx="920" cy="500" r="18" fill="url(#goldRim)" />
+    <rect x="520" y="140" width="10" height="10" fill="#f43f5e" transform="rotate(25 520 140)" />
+    <rect x="760" y="160" width="12" height="12" fill="#38bdf8" transform="rotate(40 760 160)" />
+    <rect x="420" y="320" width="8" height="8" fill="#fbbf24" transform="rotate(15 420 320)" />
+    <rect x="860" y="360" width="11" height="11" fill="#a855f7" transform="rotate(55 860 360)" />
+  </svg>

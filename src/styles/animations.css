@@ -1,0 +1,146 @@
+/* ==========================================================================
+   VELOOP Rewards - Motion System
+   Principles: Smooth, short, subtle, performance-friendly, non-distracting
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+/* 
+ * Prepared Shimmer for future Play Now & High-Reward CTAs
+ * Elegant, restrained diagonal sweep without blinding glare
+ */
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  40%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Motion Utility Classes
+   ========================================================================== */
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) ease-out forwards;
+}
+
+.animate-fade-up {
+  animation: fadeUp var(--transition-smooth) ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--transition-normal) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-subtle {
+  animation: subtlePulse 3s infinite ease-in-out;
+}
+
+.animate-spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Micro-interaction transitions */
+.transition-hover-elevation {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.transition-hover-elevation:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.transition-button-press:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Shimmer Overlay Class for Reusable Use */
+.shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 100%
+  );
+  animation: shimmerSweep 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .shimmer-sweep {
+    display: none !important;
+  }
+}

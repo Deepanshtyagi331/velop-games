@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+      <radialGradient id="bg6" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="#1a1c38" />
+        <stop offset="60%" stop-color="#121426" />
+        <stop offset="100%" stop-color="#0a0b16" />
+      </radialGradient>
+      <linearGradient id="speed" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6366f1" />
+        <stop offset="50%" stop-color="#818cf8" />
+        <stop offset="100%" stop-color="#38bdf8" />
+      </linearGradient>
+      <linearGradient id="goldNum" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#fef08a" />
+        <stop offset="50%" stop-color="#f59e0b" />
+        <stop offset="100%" stop-color="#b45309" />
+      </linearGradient>
+      <filter id="glow6" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur" />
+        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+    <rect width="1280" height="720" fill="url(#bg6)" />
+    <!-- Tunnel Acceleration Lines converging to (640, 360) -->
+    <g stroke="url(#speed)" stroke-width="1.5" opacity="0.35">
+      <line x1="0" y1="0" x2="640" y2="360" />
+      <line x1="1280" y1="0" x2="640" y2="360" />
+      <line x1="0" y1="720" x2="640" y2="360" />
+      <line x1="1280" y1="720" x2="640" y2="360" />
+      <line x1="640" y1="0" x2="640" y2="360" stroke-dasharray="10 15" />
+      <line x1="640" y1="720" x2="640" y2="360" stroke-dasharray="10 15" />
+      <line x1="0" y1="360" x2="640" y2="360" stroke-dasharray="10 15" />
+      <line x1="1280" y1="360" x2="640" y2="360" stroke-dasharray="10 15" />
+    </g>
+    <!-- Geometric Concentric Speed Squares -->
+    <rect x="520" y="290" width="240" height="140" rx="20" fill="none" stroke="#6366f1" stroke-width="2" opacity="0.4" />
+    <rect x="420" y="235" width="440" height="250" rx="30" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.25" />
+    <rect x="300" y="170" width="680" height="380" rx="40" fill="none" stroke="#818cf8" stroke-width="1.5" opacity="0.15" />
+
+    <!-- Central Focal Number '7' with 3D Bevel & Light trails -->
+    <g transform="translate(640, 370)" filter="url(#glow6)">
+      <text x="0" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="160" font-weight="800" text-anchor="middle" fill="url(#goldNum)" stroke="#fde047" stroke-width="3">
+        7
+      </text>
+    </g>
+    <!-- Flanking Numbers in Motion '3' & '9' -->
+    <g transform="translate(430, 390) scale(0.65)" opacity="0.75" filter="url(#glow6)">
+      <text x="0" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="130" font-weight="700" text-anchor="middle" fill="#38bdf8">
+        3
+      </text>
+    </g>
+    <g transform="translate(850, 390) scale(0.65)" opacity="0.75" filter="url(#glow6)">
+      <text x="0" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="130" font-weight="700" text-anchor="middle" fill="#818cf8">
+        9
+      </text>
+    </g>
+    <g transform="translate(530, 240) scale(0.4)" opacity="0.5">
+      <text x="0" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="110" font-weight="700" text-anchor="middle" fill="#f8fafc">
+        8
+      </text>
+    </g>
+    <g transform="translate(750, 240) scale(0.4)" opacity="0.5">
+      <text x="0" y="50" font-family="'Plus Jakarta Sans', sans-serif" font-size="110" font-weight="700" text-anchor="middle" fill="#f8fafc">
+        5
+      </text>
+    </g>
+    <!-- High speed particles -->
+    <circle cx="600" cy="300" r="4" fill="#fbbf24" filter="url(#glow6)" />
+    <circle cx="690" cy="420" r="5" fill="#38bdf8" filter="url(#glow6)" />
+    <circle cx="560" cy="440" r="3" fill="#ffffff" />
+    <circle cx="720" cy="310" r="3.5" fill="#f59e0b" />
+  </svg>

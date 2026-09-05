@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+      <radialGradient id="bg12" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="#1c1936" />
+        <stop offset="60%" stop-color="#110f22" />
+        <stop offset="100%" stop-color="#080712" />
+      </radialGradient>
+      <linearGradient id="gemEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6ee7b7" />
+        <stop offset="50%" stop-color="#10b981" />
+        <stop offset="100%" stop-color="#047857" />
+      </linearGradient>
+      <linearGradient id="gemSapphire" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#93c5fd" />
+        <stop offset="50%" stop-color="#3b82f6" />
+        <stop offset="100%" stop-color="#1d4ed8" />
+      </linearGradient>
+      <linearGradient id="gemRuby" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#fda4af" />
+        <stop offset="50%" stop-color="#f43f5e" />
+        <stop offset="100%" stop-color="#9f1239" />
+      </linearGradient>
+      <linearGradient id="gemAmethyst" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#d8b4fe" />
+        <stop offset="50%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#6b21a8" />
+      </linearGradient>
+      <filter id="glow12" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur" />
+        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+    <rect width="1280" height="720" fill="url(#bg12)" />
+    <!-- Cavern Ambient Lighting -->
+    <ellipse cx="640" cy="400" rx="360" ry="160" fill="#312e81" opacity="0.35" filter="url(#glow12)" />
+
+    <!-- Gem Cluster -->
+    <!-- Large Central Emerald -->
+    <g transform="translate(640, 340)" filter="url(#glow12)">
+      <polygon points="0,-80 70,-35 45,65 -45,65 -70,-35" fill="url(#gemEmerald)" stroke="#a7f3d0" stroke-width="2.5" />
+      <!-- Facets -->
+      <polygon points="0,-80 0,0 -70,-35" fill="#34d399" opacity="0.5" />
+      <polygon points="0,-80 70,-35 0,0" fill="#a7f3d0" opacity="0.75" />
+      <polygon points="0,0 70,-35 45,65" fill="#059669" />
+      <polygon points="0,0 45,65 -45,65" fill="#10b981" />
+      <polygon points="0,0 -45,65 -70,-35" fill="#047857" />
+    </g>
+
+    <!-- Ruby (Left) -->
+    <g transform="translate(480, 390)">
+      <polygon points="0,-60 55,-25 35,50 -35,50 -55,-25" fill="url(#gemRuby)" stroke="#fecdd3" stroke-width="2" filter="url(#glow12)" />
+      <polygon points="0,-60 55,-25 0,0" fill="#fda4af" opacity="0.75" />
+      <polygon points="0,0 55,-25 35,50" fill="#e11d48" />
+      <polygon points="0,0 35,50 -35,50" fill="#be123c" />
+    </g>
+
+    <!-- Sapphire (Right) -->
+    <g transform="translate(800, 390)">
+      <polygon points="0,-65 60,-30 40,55 -40,55 -60,-30" fill="url(#gemSapphire)" stroke="#bfdbfe" stroke-width="2" filter="url(#glow12)" />
+      <polygon points="0,-65 60,-30 0,0" fill="#93c5fd" opacity="0.8" />
+      <polygon points="0,0 60,-30 40,55" fill="#2563eb" />
+      <polygon points="0,0 40,55 -40,55" fill="#1d4ed8" />
+    </g>
+
+    <!-- Amethyst (Foreground Lower) -->
+    <g transform="translate(640, 480)">
+      <polygon points="0,-45 40,-20 25,35 -25,35 -40,-20" fill="url(#gemAmethyst)" stroke="#e9d5ff" stroke-width="1.5" filter="url(#glow12)" />
+      <polygon points="0,-45 40,-20 0,0" fill="#c084fc" opacity="0.8" />
+      <polygon points="0,0 40,-20 25,35" fill="#9333ea" />
+    </g>
+
+    <!-- Floating Gem Dust Sparkles -->
+    <polygon points="640,210 644,222 656,226 644,230 640,242 636,230 624,226 636,222" fill="#ffffff" filter="url(#glow12)" />
+    <polygon points="420,310 423,319 432,322 423,325 420,334 417,325 408,322 417,319" fill="#fbbf24" filter="url(#glow12)" />
+    <polygon points="860,310 863,319 872,322 863,325 860,334 857,325 848,322 857,319" fill="#38bdf8" filter="url(#glow12)" />
+  </svg>

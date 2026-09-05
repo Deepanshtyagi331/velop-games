@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <defs>
+      <radialGradient id="bg7" cx="50%" cy="50%" r="70%">
+        <stop offset="0%" stop-color="#14213d" />
+        <stop offset="60%" stop-color="#0f172a" />
+        <stop offset="100%" stop-color="#080d1a" />
+      </radialGradient>
+      <radialGradient id="bubble1" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="rgba(255, 255, 255, 0.85)" />
+        <stop offset="40%" stop-color="rgba(56, 189, 248, 0.4)" />
+        <stop offset="80%" stop-color="rgba(168, 85, 247, 0.35)" />
+        <stop offset="100%" stop-color="rgba(99, 102, 241, 0.6)" />
+      </radialGradient>
+      <radialGradient id="bubbleGold" cx="35%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="rgba(255, 255, 255, 0.9)" />
+        <stop offset="45%" stop-color="rgba(251, 191, 36, 0.5)" />
+        <stop offset="80%" stop-color="rgba(245, 158, 11, 0.35)" />
+        <stop offset="100%" stop-color="rgba(217, 119, 6, 0.7)" />
+      </radialGradient>
+      <filter id="glow7" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+        <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+      </filter>
+    </defs>
+    <rect width="1280" height="720" fill="url(#bg7)" />
+    <!-- Ambient Bioluminescent Depth Orbs -->
+    <circle cx="640" cy="360" r="320" fill="#1e293b" opacity="0.3" filter="url(#glow7)" />
+    <circle cx="480" cy="420" r="180" fill="#312e81" opacity="0.25" filter="url(#glow7)" />
+    
+    <!-- Central Cluster of Floating Iridescent Bubbles -->
+    <!-- Large Main Bubble -->
+    <g transform="translate(640, 360)">
+      <circle cx="0" cy="0" r="110" fill="url(#bubble1)" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" filter="url(#glow7)" />
+      <ellipse cx="-45" cy="-45" rx="30" ry="18" fill="#ffffff" opacity="0.75" transform="rotate(-30 -45 -45)" />
+      <ellipse cx="40" cy="45" rx="14" ry="7" fill="#38bdf8" opacity="0.5" />
+    </g>
+    <!-- Secondary Gold Reward Bubble -->
+    <g transform="translate(790, 270)">
+      <circle cx="0" cy="0" r="75" fill="url(#bubbleGold)" stroke="rgba(254, 240, 138, 0.8)" stroke-width="2" filter="url(#glow7)" />
+      <ellipse cx="-30" cy="-30" rx="18" ry="10" fill="#ffffff" opacity="0.8" transform="rotate(-30 -30 -30)" />
+    </g>
+    <!-- Cyan Bubble -->
+    <g transform="translate(480, 290)">
+      <circle cx="0" cy="0" r="85" fill="url(#bubble1)" stroke="rgba(125, 211, 252, 0.8)" stroke-width="2" filter="url(#glow7)" />
+      <ellipse cx="-35" cy="-35" rx="22" ry="12" fill="#ffffff" opacity="0.8" transform="rotate(-30 -35 -35)" />
+    </g>
+    <!-- Bursting Bubble with Radial Particle Splashes -->
+    <g transform="translate(750, 480)">
+      <circle cx="0" cy="0" r="50" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.6" />
+      <circle cx="-35" cy="-25" r="5" fill="#38bdf8" filter="url(#glow7)" />
+      <circle cx="35" cy="-30" r="6" fill="#818cf8" filter="url(#glow7)" />
+      <circle cx="45" cy="20" r="4.5" fill="#fbbf24" filter="url(#glow7)" />
+      <circle cx="-25" cy="40" r="5.5" fill="#38bdf8" />
+      <circle cx="0" cy="-45" r="4" fill="#ffffff" />
+      <circle cx="-45" cy="15" r="3.5" fill="#a855f7" />
+    </g>
+    <!-- Background Bubbles -->
+    <circle cx="360" cy="460" r="48" fill="url(#bubble1)" opacity="0.55" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+    <circle cx="920" cy="410" r="54" fill="url(#bubble1)" opacity="0.6" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+    <circle cx="610" cy="190" r="38" fill="url(#bubbleGold)" opacity="0.65" stroke="rgba(254,240,138,0.5)" stroke-width="1.5" />
+  </svg>
